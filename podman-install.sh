@@ -891,7 +891,7 @@ parse_arguments() {
         case $1 in
             -v|--version)
                 if [ -n "$2" ] && [[ $2 != -* ]]; then
-                    BIRDNET_GO_VERSION="$2"
+                    O_VERSION="$2"
                     shift 2
                 else
                     echo "❌ Error: --version requires a value" >&2
@@ -920,8 +920,8 @@ parse_arguments() {
     done
     
     # Validate that the version starts with podman- prefix
-    if [[ ! "$BIRDNET_GO_VERSION" =~ ^podman- ]]; then
-        print_message "⚠️ Adding 'podman-' prefix to version: $BIRDNET_GO_VERSION" "$YELLOW"
+    if [[ ! "$O_VERSION" =~ ^podman- ]]; then
+        print_message "⚠️ Adding 'podman-' prefix to version: $O_VERSION" "$YELLOW"
         BIRDNET_GO_VERSION="podman-$BIRDNET_GO_VERSION"
     fi
     
@@ -1788,8 +1788,8 @@ Volume=./config:/config
 Volume=./data:/data
 PublishPort=${WEB_PORT}:8080
 Environment=TZ=${CONFIGURED_TZ:-UTC}
-Environment=BIRDNET_UID=\$(id -u)
-Environment=BIRDNET_GID=\$(id -g)
+Environment=BIRDNET_UID=%U
+Environment=BIRDNET_GID=%G
 Device=/dev/snd:/dev/snd
 Network=birdnet-bridge
 Tmpfs=/config/hls:exec,size=50M,uid=\$(id -u),gid=\$(id -g),mode=0755
