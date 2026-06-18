@@ -1792,7 +1792,7 @@ Environment=BIRDNET_UID=%U
 Environment=BIRDNET_GID=%G
 Device=/dev/snd:/dev/snd
 Network=birdnet-bridge
-Tmpfs=/config/hls:exec,size=50M,uid=\$(id -u),gid=\$(id -g),mode=0755
+Tmpfs=/config/hls:exec,size=50M,mode=0755
 
 [Service]
 Restart=always
